@@ -16,16 +16,18 @@ export default function Banner() {
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
         <SwiperSlide>
           <img
-            src="https://photos.zillowstatic.com/fp/e8d51d4916ce005f16e7d4b61c725ba2-p_e.webp"
-            className="h-[300px] object-cover select-none"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
             src="https://photos.zillowstatic.com/fp/75dd2a6d525738f43ff86261310c1bc6-p_e.webp"
             className="h-[300px] object-cover select-none"
           />
         </SwiperSlide>
+
+        <SwiperSlide>
+          <img
+            src="https://photos.zillowstatic.com/fp/e8d51d4916ce005f16e7d4b61c725ba2-p_e.webp"
+            className="h-[300px] object-cover select-none"
+          />
+        </SwiperSlide>
+
         <SwiperSlide>
           <img
             src="https://photos.zillowstatic.com/fp/adf819b875dcdf818d2dbd5719e99842-p_e.webp"
