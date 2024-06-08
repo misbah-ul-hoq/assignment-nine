@@ -1,5 +1,6 @@
 import Banner from "../components/Banner";
 import EstateCardContainer from "../components/EstateCardContainer";
+import Pricing from "./Pricing";
 
 const Home = () => {
   return (
