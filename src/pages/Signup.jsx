@@ -1,7 +1,9 @@
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const Signup = () => {
+  useDocumentTitle("SignUp ");
   return (
     <div className="my-8 flex flex-col">
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">

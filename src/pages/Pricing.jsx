@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const listings = [
   {
@@ -31,9 +31,7 @@ const listings = [
 ];
 
 const Pricing = () => {
-  useEffect(() => {
-    document.title = "Pricing";
-  }, []);
+  useDocumentTitle("Pricing");
   return (
     <div className="min-h-screen bg-gradient-to-r from-primary to-purple-600 p-6 flex flex-col items-center">
       <h1 className="text-4xl font-bold text-white mb-8">Pricing Plans</h1>

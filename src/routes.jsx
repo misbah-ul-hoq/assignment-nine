@@ -14,20 +14,18 @@ const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorElement />,
     children: [
-      { path: "/", element: <Home />, title: "Home" },
+      { path: "/", element: <Home /> },
       {
         path: "/login",
         element: <Login />,
-        title: "Login",
       },
       {
         path: "/signup",
         element: <Signup />,
-        title: "Sign Up",
       },
       {
         path: "/pricing",
-        title: "Pricing",
+
         element: (
           <PrivateRoute>
             <Pricing />

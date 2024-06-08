@@ -1,9 +1,9 @@
 import Banner from "../components/Banner";
 import EstateCardContainer from "../components/EstateCardContainer";
-import router from "../routes";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const Home = () => {
-  document.title = router.title || "Restate";
+  useDocumentTitle("Home | Restate");
   return (
     <main className="home-wrapper space-y-8">
       <div className="container-center my-10">
