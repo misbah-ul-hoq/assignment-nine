@@ -11,8 +11,8 @@ const Login = () => {
     setPasswordVisible(!passwordVisible);
   };
   return (
-    <div className="flex justify-center items-center my-8">
-      <div className="w-full max-w-md p-8 space-y-4 rounded-lg">
+    <div className="flex justify-center items-center py-8 bg-[url('/blob.svg')] bg-no-repeat bg-cover">
+      <div className="w-full max-w-md px-8 space-y-4 rounded-lg">
         <h2 className="text-2xl font-bold text-center">Login</h2>
         <form className="space-y-4">
           <div>

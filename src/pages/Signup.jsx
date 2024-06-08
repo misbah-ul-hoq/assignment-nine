@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const Signup = () => {
-  useDocumentTitle("SignUp ");
+  useDocumentTitle("SignUp");
   return (
-    <div className="my-8 flex flex-col">
+    <div className="py-8 flex flex-col bg-no-repeat bg-cover bg-[url(/blob3.svg)]">
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
         <div className="px-6 py-5 rounded text-black w-full">
           <h1 className="mb-8 text-3xl text-center">Sign up</h1>
