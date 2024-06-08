@@ -15,7 +15,7 @@ const EstateCard = (props) => {
     facilities,
   } = props.estate;
   return (
-    <div className="card card-compact max-w-96 bg-base-100 shadow-xl">
+    <div className="card rounded-lg card-compact max-w-96 bg-base-100 shadow-xl">
       <figure>
         <img src={background_image} alt={estate_title} />
       </figure>
