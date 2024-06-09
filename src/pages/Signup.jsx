@@ -1,13 +1,15 @@
 import { FaEye, FaEyeSlash, FaFacebook, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useDocumentTitle from "../hooks/useDocumentTitle";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../Providers/AuthProvider";
+// import { ref, uploadBytes } from "firebase/storage";
+// import { storage } from "../firebase.config";
 
 const Signup = () => {
-  const regex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-
+  const { signUpWithEmailAndPassword } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState("");
-
+  // const [imageUpload, setImageUpload] = useState(null);
   const [isMinLength, setIsMinLength] = useState(false);
   const [hasUppercase, setHasUppercase] = useState(false);
   const [hasLowercase, setHasLowercase] = useState(false);
@@ -15,7 +17,6 @@ const Signup = () => {
 
   const handlePasswordChange = (e) => {
     const value = e.target.value;
-    // setPassword(value);
     setIsMinLength(value.length >= 6);
     setHasUppercase(/[A-Z]/.test(value));
     setHasLowercase(/[a-z]/.test(value));
@@ -31,13 +32,30 @@ const Signup = () => {
     const name = form.get("fullname");
     const email = form.get("email");
     const password = form.get("password");
+    // const imageRef = ref(storage, `users/${imageUpload.name}`);
+    // uploadBytes(imageRef, imageUpload).then((what) => {
+    //   console.log(what);
+    // });
     setErrorMessage("");
-    if (!password.match(regex)) {
-      setErrorMessage(
-        "Plese provide at least 6 characters and at least one uppercase and lowercase letter"
-      );
+    // if (!imageUpload) {
+    //   return;
+    // }
+    if (!isMinLength) {
+      setErrorMessage("Please provide 6 characters");
       return;
     }
+    if (!hasUppercase) {
+      setErrorMessage("Please provide an uppercase letter");
+      return;
+    }
+    if (!hasLowercase) {
+      setErrorMessage("Please provide a lowercase letter");
+      return;
+    }
+    signUpWithEmailAndPassword(email, password).then((userCredential) => {
+      userCredential.user.displayName = name;
+      console.log(userCredential.user);
+    });
   };
 
   useDocumentTitle("SignUp");
@@ -52,6 +70,15 @@ const Signup = () => {
               className="block border border-grey-light w-full p-3 rounded mb-4"
               name="fullname"
               placeholder="Full Name"
+              required
+            />
+
+            <input
+              type="file"
+              className="file-input mb-4 file-input-bordered file-input-secondary w-full max-w-xs"
+              // onChange={(event) => {
+              //   setImageUpload(event.target.files[0]);
+              // }}
               required
             />
             <input
