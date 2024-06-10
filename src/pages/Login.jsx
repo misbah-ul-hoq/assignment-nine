@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 import { AuthContext } from "../Providers/AuthProvider";
 
@@ -11,6 +11,8 @@ const Login = () => {
   const { logInWithEmailAndPassword, signUpWithGoogle, signUpWithFacebook } =
     useContext(AuthContext);
 
+  const location = useLocation();
+
   const navigate = useNavigate();
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -18,7 +20,8 @@ const Login = () => {
   const handleGoogleLogin = () => {
     signUpWithGoogle()
       .then(() => {
-        navigate(navigate.state ? navigate.state : "/");
+        // console.log(navigate.state);
+        navigate(location.state ? location.state : "/");
       })
       .catch(() => {});
   };
@@ -26,7 +29,7 @@ const Login = () => {
   const handleFacebookLogin = () => {
     signUpWithFacebook()
       .then(() => {
-        navigate(navigate.state ? navigate.state : "/");
+        navigate(location.state ? location.state : "/");
       })
       .catch((error) => {
         setErrorMessage(error.message);
@@ -40,7 +43,7 @@ const Login = () => {
     const password = form.get("password");
     logInWithEmailAndPassword(email, password)
       .then(() => {
-        navigate(navigate.location ? navigate.location : "/");
+        navigate(location.state ? location.state : "/");
       })
       .catch((error) => {
         if (error.code === "auth/invalid-credential") {

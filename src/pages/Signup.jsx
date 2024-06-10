@@ -12,6 +12,7 @@ const Signup = () => {
   const [hasUppercase, setHasUppercase] = useState(false);
   const [hasLowercase, setHasLowercase] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
 
   const handlePasswordChange = (e) => {
@@ -28,7 +29,7 @@ const Signup = () => {
   const handleGoogleSignUp = () => {
     signUpWithGoogle()
       .then(() => {
-        navigate(navigate.state ? navigate.state : "/");
+        // navigate(navigate.state ? navigate.state : "/");
       })
       .catch((error) => {
         setErrorMessage(error.message);
@@ -38,7 +39,7 @@ const Signup = () => {
   const handleFacebookSignup = () => {
     signUpWithFacebook()
       .then(() => {
-        navigate(navigate.state ? navigate.state : "/");
+        // navigate(location.state ? location.state : "/");
       })
       .catch((error) => {
         setErrorMessage(error.message);
@@ -52,14 +53,9 @@ const Signup = () => {
     const email = form.get("email");
     const password = form.get("password");
     const photoURL = form.get("photoURL");
-    // const imageRef = ref(storage, `users/${imageUpload.name}`);
-    // uploadBytes(imageRef, imageUpload).then((what) => {
-    //   console.log(what);
-    // });
+
     setErrorMessage("");
-    // if (!imageUpload) {
-    //   return;
-    // }
+
     if (!isMinLength) {
       setErrorMessage("Please provide 6 characters");
       return;
