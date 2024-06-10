@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 import { useContext, useState } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
-import RedirectURL from "../hooks/useNavigate";
 
 const Signup = () => {
   const { signUpWithEmailAndPassword, signUpWithGoogle } =
@@ -179,11 +178,19 @@ const Signup = () => {
           className="btn btn-outline w-full flex items-center justify-center space-x-2 bg-white border mb-4"
           onClick={handleGoogleSignUp}
         >
-          <FaGoogle></FaGoogle>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png"
+            alt=""
+            className="w-8 h-8 object-cover"
+          />
           <span className="">SignUp with Google</span>
         </button>
-        <button className="btn btn-outline w-full bg-blue-500 flex items-center justify-center text-white hover:bg-blue-600">
-          <FaFacebook />
+        <button className="btn btn-secondary w-full flex items-center justify-center text-white">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
+            alt=""
+            className="w-8 h-8 object-cover"
+          />
           <span>SignUp with Facebook</span>
         </button>
       </div>
