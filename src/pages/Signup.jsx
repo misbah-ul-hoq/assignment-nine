@@ -1,19 +1,19 @@
 import { FaEye, FaEyeSlash, FaFacebook, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 import { useContext, useState } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
-// import { ref, uploadBytes } from "firebase/storage";
-// import { storage } from "../firebase.config";
+import RedirectURL from "../hooks/useNavigate";
 
 const Signup = () => {
-  const { signUpWithEmailAndPassword } = useContext(AuthContext);
+  const { signUpWithEmailAndPassword, signUpWithGoogle } =
+    useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState("");
-  // const [imageUpload, setImageUpload] = useState(null);
   const [isMinLength, setIsMinLength] = useState(false);
   const [hasUppercase, setHasUppercase] = useState(false);
   const [hasLowercase, setHasLowercase] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handlePasswordChange = (e) => {
     const value = e.target.value;
@@ -24,6 +24,16 @@ const Signup = () => {
 
   const handleShowPassword = () => {
     setShowPassword((pre) => !pre);
+  };
+
+  const handleGoogleSignUp = () => {
+    signUpWithGoogle()
+      .then(() => {
+        navigate(navigate.state ? navigate.state : "/");
+      })
+      .catch((error) => {
+        setErrorMessage(error.message);
+      });
   };
 
   const handleSubmit = (e) => {
@@ -58,6 +68,7 @@ const Signup = () => {
         userCredential.user.displayName = name;
         userCredential.user.photoURL = photoURL;
         console.log(userCredential.user);
+        navigate(navigate.state ? navigate.state : "/");
       })
       .catch((error) => {
         setErrorMessage(error.message);
@@ -164,13 +175,16 @@ const Signup = () => {
 
         <div className="divider">OR</div>
 
-        <button className="btn btn-outline w-full flex items-center justify-center space-x-2 bg-white border mb-4">
+        <button
+          className="btn btn-outline w-full flex items-center justify-center space-x-2 bg-white border mb-4"
+          onClick={handleGoogleSignUp}
+        >
           <FaGoogle></FaGoogle>
-          <span className="">Login with Google</span>
+          <span className="">SignUp with Google</span>
         </button>
         <button className="btn btn-outline w-full bg-blue-500 flex items-center justify-center text-white hover:bg-blue-600">
           <FaFacebook />
-          <span>Login with Facebook</span>
+          <span>SignUp with Facebook</span>
         </button>
       </div>
     </div>

@@ -13,10 +13,15 @@ const NavBar = () => {
       <li>
         <NavLink to="/pricing">Pricing</NavLink>
       </li>
+      {user && (
+        <li>
+          <NavLink to="/update-profile">Update Profile</NavLink>
+        </li>
+      )}
     </>
   );
   return (
-    <div className="navbar shadow-xl">
+    <div className="navbar shadow-xl px-2 md:px-10 lg:px-14">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -37,7 +42,7 @@ const NavBar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[100] space-y-4 p-2 shadow bg-base-100 rounded-box w-52"
           >
             {navLinks}
           </ul>
@@ -69,7 +74,7 @@ const NavBar = () => {
         )}
         {user && (
           <div
-            className="tooltip tooltip-bottom"
+            className="tooltip tooltip-bottom mr-6"
             data-tip={user.displayName ? user.displayName : "No name"}
           >
             <div

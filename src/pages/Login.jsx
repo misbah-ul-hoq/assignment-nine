@@ -8,11 +8,20 @@ const Login = () => {
   useDocumentTitle("LogIn");
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const { logInWithEmailAndPassword } = useContext(AuthContext);
+  const { logInWithEmailAndPassword, signUpWithGoogle } =
+    useContext(AuthContext);
 
   const navigate = useNavigate();
 
   const [errorMessage, setErrorMessage] = useState("");
+
+  const handleGoogleLogin = () => {
+    signUpWithGoogle()
+      .then(() => {
+        navigate(navigate.state ? navigate.state : "/");
+      })
+      .catch(() => {});
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -24,7 +33,9 @@ const Login = () => {
         navigate(navigate.location ? navigate.location : "/");
       })
       .catch((error) => {
-        setErrorMessage(error.message);
+        if (error.code === "auth/invalid-credential") {
+          setErrorMessage("Wrong email or password");
+        }
       });
   };
 
@@ -66,8 +77,8 @@ const Login = () => {
             >
               {passwordVisible ? <FaEyeSlash /> : <FaEye />}
             </button>
-            {errorMessage && <p className="text-error">{errorMessage}</p>}
           </div>
+          {errorMessage && <p className="text-error">{errorMessage}</p>}
           <button type="submit" className="btn btn-primary w-full">
             Login
           </button>
@@ -79,7 +90,10 @@ const Login = () => {
           </Link>
         </p>
         <div className="divider">OR</div>
-        <button className="btn btn-outline w-full flex items-center justify-center space-x-2 bg-white border">
+        <button
+          className="btn btn-outline w-full flex items-center justify-center space-x-2 bg-white border"
+          onClick={handleGoogleLogin}
+        >
           <FaGoogle></FaGoogle>
           <span className="">Login with Google</span>
         </button>
