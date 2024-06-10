@@ -32,6 +32,7 @@ const Signup = () => {
     const name = form.get("fullname");
     const email = form.get("email");
     const password = form.get("password");
+    const photoURL = form.get("photoURL");
     // const imageRef = ref(storage, `users/${imageUpload.name}`);
     // uploadBytes(imageRef, imageUpload).then((what) => {
     //   console.log(what);
@@ -52,10 +53,15 @@ const Signup = () => {
       setErrorMessage("Please provide a lowercase letter");
       return;
     }
-    signUpWithEmailAndPassword(email, password).then((userCredential) => {
-      userCredential.user.displayName = name;
-      console.log(userCredential.user);
-    });
+    signUpWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        userCredential.user.displayName = name;
+        userCredential.user.photoURL = photoURL;
+        console.log(userCredential.user);
+      })
+      .catch((error) => {
+        setErrorMessage(error.message);
+      });
   };
 
   useDocumentTitle("SignUp");
@@ -73,14 +79,14 @@ const Signup = () => {
               required
             />
 
-            <input
+            {/* <input
               type="file"
               className="file-input mb-4 file-input-bordered file-input-secondary w-full max-w-xs"
-              // onChange={(event) => {
-              //   setImageUpload(event.target.files[0]);
-              // }}
+              onChange={(event) => {
+                setImageUpload(event.target.files[0]);
+              }}
               required
-            />
+            /> */}
             <input
               type="email"
               className="block border border-grey-light w-full p-3 rounded mb-4"
@@ -95,6 +101,13 @@ const Signup = () => {
               name="password"
               placeholder="Password"
               required
+            />
+
+            <input
+              type="text"
+              placeholder="Photo URL"
+              className="input input-bordered w-full max-w-xs mb-4"
+              name="photoURL"
             />
             <span
               className="absolute top-[224px] right-8 text-2xl p-2"

@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 
 const NavBar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   console.log(user);
   const navLinks = (
     <>
@@ -52,9 +52,47 @@ const NavBar = () => {
       </div>
 
       <div className="navbar-end">
-        <Link to="/login" className="btn btn-primary">
-          Login
-        </Link>
+        {!user && (
+          <Link to="/login" className="btn btn-primary">
+            Login
+          </Link>
+        )}
+        {user && (
+          <button
+            className="btn btn-sm btn-secondary mr-3"
+            onClick={() => {
+              logOut();
+            }}
+          >
+            Logout
+          </button>
+        )}
+        {user && (
+          <div
+            className="tooltip tooltip-bottom"
+            data-tip={user.displayName ? user.displayName : "No name"}
+          >
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <div className="w-10 rounded-full">
+                {/* <img
+                  alt="Tailwind CSS Navbar component"
+                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                /> */}
+                <img
+                  src={
+                    user.photoURL
+                      ? user.photoURL
+                      : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJgr3kFiNpz9uC3ebTkbozqIiPer2AD3AGZw&s"
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
