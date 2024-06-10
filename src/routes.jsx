@@ -8,6 +8,7 @@ import Signup from "./pages/Signup";
 import EstateDetails from "./pages/EstateDetails";
 import ErrorElement from "./pages/ErrorPage";
 import Estates from "./pages/Estates";
+import UpdateProfile from "./pages/UpdateProfile";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,14 @@ const router = createBrowserRouter([
       {
         path: "/estates",
         element: <Estates />,
+      },
+      {
+        path: "/update-profile",
+        element: (
+          <PrivateRoute>
+            <UpdateProfile />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/pricing",
