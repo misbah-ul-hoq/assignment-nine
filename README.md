@@ -9,3 +9,4 @@
 ## Npm packages used for challange task
 
 - swiper
+- animate.css
