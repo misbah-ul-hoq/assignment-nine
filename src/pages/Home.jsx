@@ -5,8 +5,8 @@ import useDocumentTitle from "../hooks/useDocumentTitle";
 const Home = () => {
   useDocumentTitle("Home | Restate");
   return (
-    <main className="home-wrapper space-y-8">
-      <div className="container-center my-10">
+    <main className="home-wrapper space-y-8 py-10">
+      <div className="container-center ">
         <Banner />
       </div>
 
