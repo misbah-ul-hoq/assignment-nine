@@ -1,11 +1,11 @@
-import { FaEye, FaEyeSlash, FaFacebook, FaGoogle } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 import { useContext, useState } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 
 const Signup = () => {
-  const { signUpWithEmailAndPassword, signUpWithGoogle } =
+  const { signUpWithEmailAndPassword, signUpWithGoogle, signUpWithFacebook } =
     useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState("");
   const [isMinLength, setIsMinLength] = useState(false);
@@ -27,6 +27,16 @@ const Signup = () => {
 
   const handleGoogleSignUp = () => {
     signUpWithGoogle()
+      .then(() => {
+        navigate(navigate.state ? navigate.state : "/");
+      })
+      .catch((error) => {
+        setErrorMessage(error.message);
+      });
+  };
+
+  const handleFacebookSignup = () => {
+    signUpWithFacebook()
       .then(() => {
         navigate(navigate.state ? navigate.state : "/");
       })
@@ -185,7 +195,10 @@ const Signup = () => {
           />
           <span className="">SignUp with Google</span>
         </button>
-        <button className="btn btn-secondary w-full flex items-center justify-center text-white">
+        <button
+          className="btn btn-secondary w-full flex items-center justify-center text-white"
+          onClick={handleFacebookSignup}
+        >
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
             alt=""
