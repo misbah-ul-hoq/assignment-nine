@@ -8,4 +8,4 @@
 
 ## Npm packages used for challange task
 
-### will be added later
+- swiper
