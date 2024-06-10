@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 import { useForm } from "react-hook-form";
 
 const UpdateProfile = () => {
-  const { user } = useContext(AuthContext);
+  const { user, updateUserInfo } = useContext(AuthContext);
   const { displayName, email, photoURL } = user;
+  const [messages, setMessages] = useState({ success: "", error: "" });
 
   const {
     register,
@@ -18,8 +19,14 @@ const UpdateProfile = () => {
     },
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (userInfo) => {
+    updateUserInfo(userInfo)
+      .then(() => {
+        setMessages({ success: "Updated successfully", error: "" });
+      })
+      .catch(() => {
+        setMessages({ success: "", error: "Something went wrong" });
+      });
   };
   return (
     <div className="flex justify-center items-center py-7">
@@ -80,10 +87,13 @@ const UpdateProfile = () => {
           </div>
           <div className="flex items-center justify-between">
             <button className="btn btn-primary w-full" type="submit">
-              Sign Up
+              Update Profile
             </button>
           </div>
         </form>
+        <p className={`${messages.error ? "text-error" : "text-success"}`}>
+          {messages.error ? messages.error : messages.success}
+        </p>
       </div>
     </div>
   );
