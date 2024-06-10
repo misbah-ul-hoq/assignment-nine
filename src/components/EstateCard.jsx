@@ -1,14 +1,7 @@
 import { Link } from "react-router-dom";
-import useIntersectionObserver from "../hooks/useIntersectionObserver";
 import "animate.css";
-
 /* eslint-disable react/prop-types */
 const EstateCard = (props) => {
-  const [observerRef, isIntersecting] = useIntersectionObserver({
-    root: null, // use the viewport as the root
-    rootMargin: "0px",
-    threshold: 0.75, // 10% of the element needs to be visible to trigger the callback
-  });
   const {
     id,
     background_image,
@@ -23,10 +16,7 @@ const EstateCard = (props) => {
   } = props.estate;
   return (
     <div
-      className={`animate__animated card rounded-lg card-compact max-w-96 bg-base-100 shadow-xl ${
-        isIntersecting && "animate__fadeInRight "
-      }`}
-      // ref={observerRef}
+      className={`card rounded-lg card-compact max-w-96 bg-base-100 shadow-xl`}
     >
       <figure>
         <img src={background_image} alt={estate_title} />
