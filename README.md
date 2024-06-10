@@ -1,6 +1,10 @@
-# React + Vite
+# Restate Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Up to date properties
+- Create account with email and password
+- Login and explore
+- Find houses if you need to buy
+- Find customers if you need to sell
 
 Currently, two official plugins are available:
 
