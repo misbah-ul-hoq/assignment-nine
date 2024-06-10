@@ -8,7 +8,7 @@ const Login = () => {
   useDocumentTitle("LogIn");
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const { logInWithEmailAndPassword, signUpWithGoogle } =
+  const { logInWithEmailAndPassword, signUpWithGoogle, signUpWithFacebook } =
     useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -21,6 +21,16 @@ const Login = () => {
         navigate(navigate.state ? navigate.state : "/");
       })
       .catch(() => {});
+  };
+
+  const handleFacebookLogin = () => {
+    signUpWithFacebook()
+      .then(() => {
+        navigate(navigate.state ? navigate.state : "/");
+      })
+      .catch((error) => {
+        setErrorMessage(error.message);
+      });
   };
 
   const handleLogin = (e) => {
@@ -101,7 +111,10 @@ const Login = () => {
           />
           <span className="">Login with Google</span>
         </button>
-        <button className="btn btn-secondary w-full flex items-center justify-center">
+        <button
+          className="btn btn-secondary w-full flex items-center justify-center"
+          onClick={handleFacebookLogin}
+        >
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
             alt=""
