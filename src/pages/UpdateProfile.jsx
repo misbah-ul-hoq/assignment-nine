@@ -4,9 +4,21 @@ import { useForm } from "react-hook-form";
 
 const UpdateProfile = () => {
   const { user } = useContext(AuthContext);
-  const { register, handleSubmit } = useForm();
-  const { displayName } = user;
-  //   console.log(displayName, email, photoURL);
+  const { displayName, email, photoURL } = user;
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      displayName,
+      email,
+      photoURL,
+    },
+  });
+
   const onSubmit = (data) => {
     console.log(data);
   };
@@ -27,7 +39,12 @@ const UpdateProfile = () => {
               id="name"
               type="text"
               placeholder="Enter your name"
+              {...register("displayName", {
+                required: "Name is Required",
+              })}
+              //   onChange={(e) => setValue("displayName", e.target.value)}
             />
+            <p className="text-error">{errors.displayName?.message}</p>
           </div>
           <div className="mb-4">
             <label
@@ -41,7 +58,11 @@ const UpdateProfile = () => {
               id="email"
               type="email"
               placeholder="Enter your email"
+              {...register("email", {
+                required: "Email is required",
+              })}
             />
+            <p className="text-error">{errors.email?.message}</p>
           </div>
           <div className="mb-6">
             <label
@@ -55,6 +76,7 @@ const UpdateProfile = () => {
               id="photoURL"
               type="url"
               placeholder="Enter your photo URL"
+              {...register("photoURL")}
             />
           </div>
           <div className="flex items-center justify-between">

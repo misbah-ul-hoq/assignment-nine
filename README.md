@@ -10,3 +10,4 @@
 
 - swiper
 - animate.css
+- React Hook Form
